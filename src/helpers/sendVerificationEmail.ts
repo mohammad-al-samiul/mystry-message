@@ -7,7 +7,6 @@ interface ISendVerificationEmailProps {
   email: string;
   verifyCode: string;
 }
-
 export async function sendVerificationEmail({
   username,
   email,

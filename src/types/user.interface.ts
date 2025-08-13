@@ -8,5 +8,5 @@ export interface IUser {
   verifyCodeExpiry: Date;
   isVerified: boolean;
   isAcceptingMessage: boolean;
-  message: IMessage[];
+  messages: IMessage[];
 }

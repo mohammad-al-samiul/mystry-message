@@ -1,5 +1,5 @@
-import { IMessage } from "@/interface/message.interface";
-import { IUser } from "@/interface/user.interface";
+import { IMessage } from "@/types/message.interface";
+import { IUser } from "@/types/user.interface";
 import mongoose, { Schema } from "mongoose";
 
 const messageSchema = new Schema<IMessage>({
@@ -52,7 +52,7 @@ const userSchema = new Schema<IUser>({
     type: Boolean,
     default: true,
   },
-  message: [messageSchema],
+  messages: [messageSchema],
 });
 
 const UserModel =
