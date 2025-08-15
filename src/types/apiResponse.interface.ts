@@ -3,6 +3,6 @@ import { IMessage } from "./message.interface";
 export interface IApiResponse {
   success: boolean;
   message: string;
-  isAcceptingMessage?: boolean;
+  isAcceptingMessages?: boolean;
   messages?: Array<IMessage>;
 }

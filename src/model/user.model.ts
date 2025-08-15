@@ -48,7 +48,7 @@ const userSchema = new Schema<IUser>({
     type: Boolean,
     default: false,
   },
-  isAcceptingMessage: {
+  isAcceptingMessages: {
     type: Boolean,
     default: true,
   },
