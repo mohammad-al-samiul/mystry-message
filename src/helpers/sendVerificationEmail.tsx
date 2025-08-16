@@ -1,23 +1,23 @@
+import { render } from "@react-email/render";
 import EmailTemplate from "@/components/email/verificationEmail";
 import { resend } from "@/lib/resend";
 import { IApiResponse } from "@/types/apiResponse.interface";
 
-interface ISendVerificationEmailProps {
-  username: string;
-  email: string;
-  verifyCode: string;
-}
-export async function sendVerificationEmail({
-  username,
-  email,
-  verifyCode,
-}: ISendVerificationEmailProps): Promise<IApiResponse> {
+export async function sendVerificationEmail(
+  username: string,
+  email: string,
+  verifyCode: string
+): Promise<IApiResponse> {
+  const htmlContent = await render(
+    <EmailTemplate username={username} otp={verifyCode} />
+  );
+
   try {
     await resend.emails.send({
       from: "onboarding@resend.dev",
       to: email,
       subject: "Mystry Message || Verification Email",
-      react: EmailTemplate({ username, otp: verifyCode }),
+      html: htmlContent,
     });
     return {
       success: true,

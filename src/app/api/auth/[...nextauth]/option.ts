@@ -1,33 +1,30 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { NextAuthOptions } from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
 import { dbConnect } from "@/lib/dbConnect";
 import UserModel from "@/model/user.model";
 import bcrypt from "bcryptjs";
-import Credentials from "next-auth/providers/credentials";
-import { NextAuthConfig } from "next-auth";
-export const authOptions: NextAuthConfig = {
+
+export const authOptions: NextAuthOptions = {
   providers: [
-    Credentials({
+    CredentialsProvider({
+      id: "credentials",
+      name: "Credentials",
       credentials: {
-        email: {
-          type: "email",
-          label: "Email",
-        },
-        password: {
-          type: "password",
-          label: "Password",
-        },
+        email: { label: "Email", type: "text" },
+        password: { label: "Password", type: "password" },
       },
-      authorize: async (credentials: any): Promise<any> => {
+      async authorize(credentials: any): Promise<any> {
+        await dbConnect();
         try {
-          await dbConnect();
           const user = await UserModel.findOne({
-            email: credentials.email,
+            $or: [{ email: credentials.identifier }],
           });
           if (!user) {
-            throw new Error("User not found!");
+            throw new Error("No user found with this email");
           }
           if (!user.isVerified) {
-            throw new Error("Please verify your account");
+            throw new Error("Please verify your account before logging in");
           }
           const isPasswordCorrect = await bcrypt.compare(
             credentials.password,
@@ -36,7 +33,7 @@ export const authOptions: NextAuthConfig = {
           if (isPasswordCorrect) {
             return user;
           } else {
-            throw new Error("Incorrect Password!");
+            throw new Error("Incorrect password");
           }
         } catch (err: any) {
           throw new Error(err);
