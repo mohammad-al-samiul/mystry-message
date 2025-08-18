@@ -31,7 +31,7 @@ const connection: TConnectionObject = {};
 
 export async function dbConnect() {
   if (connection.isConnected) {
-    console.log("Database Already Connected");
+    console.log("Already Database Connected");
     return;
   }
   try {
