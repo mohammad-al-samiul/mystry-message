@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Toaster } from "sonner";
 import "./globals.css";
 import AuthProvider from "@/providers/AuthProvider";
 
@@ -15,7 +16,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <AuthProvider>
-        <body className={`antialiased`}>{children}</body>
+        <body className={`antialiased`}>
+          <main> {children}</main>
+          <Toaster position="bottom-right" />
+        </body>
       </AuthProvider>
     </html>
   );
