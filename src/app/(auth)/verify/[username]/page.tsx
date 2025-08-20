@@ -31,14 +31,15 @@ const VerifyAcountPage = ({ params }: IProps) => {
 
   const onSubmit = async (data: z.infer<typeof verifySchema>) => {
     try {
-      const res = await axios.post<IApiResponse>(`/api/${username}`, {
+      const res = await axios.post<IApiResponse>(`/api/verify-code`, {
         username,
         code: data.code,
       });
-      if (res.data.success) {
-        toast.success("Account verification successful");
-        router.replace("/sign-in");
-      }
+
+      toast.success("Verification successful", {
+        description: res.data.message,
+      });
+      router.replace("/sign-in");
     } catch (error) {
       const axiosError = error as AxiosError<IApiResponse>;
       toast.error("Account verification failed", {
