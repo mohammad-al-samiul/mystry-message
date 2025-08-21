@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Toaster } from "sonner";
 import "./globals.css";
 import AuthProvider from "@/providers/AuthProvider";
+import Navbar from "@/components/Navbar";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,7 +18,10 @@ export default function RootLayout({
     <html lang="en">
       <AuthProvider>
         <body className={`antialiased`}>
-          <main> {children}</main>
+          <main>
+            <Navbar />
+            {children}
+          </main>
           <Toaster position="bottom-right" />
         </body>
       </AuthProvider>
