@@ -28,3 +28,5 @@ export default function RootLayout({
     </html>
   );
 }
+
+//https://whimsical.com/complete-algorithm-user-registration-verification-messaging-ai-q-Lr9De3GDAtvGZNgcQ6YmcT
