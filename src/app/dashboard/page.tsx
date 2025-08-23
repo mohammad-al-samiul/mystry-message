@@ -56,6 +56,7 @@ const DashboardPage = () => {
       setIsSwitchLoading(false);
       try {
         const response = await axios.get<IApiResponse>("/api/get-messages");
+
         setMessages(response.data.messages || []);
         if (refresh) {
           toast("Refreshed Messages", {
@@ -80,7 +81,6 @@ const DashboardPage = () => {
     if (!session || !session.user) return;
 
     fetchMessages();
-
     fetchAcceptMessages();
   }, [session, setValue, fetchAcceptMessages, fetchMessages]);
 
