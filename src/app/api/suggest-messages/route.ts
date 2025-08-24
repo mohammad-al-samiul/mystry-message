@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { openai } from "@ai-sdk/openai";
 import { streamText } from "ai";
 
