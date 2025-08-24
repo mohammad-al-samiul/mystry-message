@@ -1,7 +1,6 @@
 import { openai } from "@ai-sdk/openai";
 import { streamText } from "ai";
 
-// Allow streaming responses up to 30 seconds
 export const maxDuration = 30;
 export const runtime = "edge";
 
@@ -20,6 +19,10 @@ export async function POST(req: Request) {
     return result.toUIMessageStreamResponse();
   } catch (err) {
     console.error("AI error:", err);
-    return Response.json({ error: "Something went wrong" }, { status: 500 });
+
+    // fallback response (static suggestions)
+    const fallback =
+      "What's your favorite book?||If you could visit any country, where would you go?||What's a skill you want to learn?";
+    return Response.json({ completion: fallback }, { status: 200 });
   }
 }
