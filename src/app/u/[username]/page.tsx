@@ -27,6 +27,7 @@ import { Loader2 } from "lucide-react";
 const specialChar = "||";
 
 const parseStringMessages = (messageString: string): string[] => {
+  console.log(messageString);
   return messageString.split(specialChar);
 };
 
